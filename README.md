@@ -2,6 +2,12 @@
 
 Vue 单页应用模板，用于个人项目的基座，免去每次初始化项目的繁琐过程，使用的框架/库包括 Vue3、TypeScript，依赖管理工具为 PNPM，构建工具为 Vite。
 
+## 相关仓库
+
+|仓库名|仓库地址|说明|
+|---|---|---|
+|react-template|https://github.com/lexmin0412/react-template|react 单页应用模板|
+
 ## 技术栈
 
 - Vue V3
