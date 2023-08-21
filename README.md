@@ -1,6 +1,6 @@
 # Vue3 单页应用模板【WIP】
 
-Vue 单页应用模板，用于个人项目的基座，免去每次初始化项目的繁琐过程，使用的框架/库包括 Vue3、TypeScript，依赖管理工具为 PNPM，构建工具为 Vite。
+Vue 单页应用模板，用于个人项目的基座，免去每次初始化项目的繁琐过程，使用的框架/库包括 Vue3、TypeScript、Ant Design Vue，依赖管理工具为 PNPM，构建工具为 Vite。
 
 ## 相关仓库
 
@@ -12,6 +12,7 @@ Vue 单页应用模板，用于个人项目的基座，免去每次初始化项�
 
 - Vue V3
 - TypeScript V5
+- Ant Design Vue V4
 - PNPM V7
 - Vite V4
 
