@@ -45,7 +45,44 @@ registry=https://registry.npmmirror.com/
 pnpm install
 ```
 
-### 4. 配置IDE
+### 4. TypeScript 配置调整
+
+配置文件调整:
+
+- 删除 tsconfig.node.json, 并去除 tsconfig.json 中对它的引用。—— 没必要
+- 将 compilerOptions.moduleResolution 选项值改为 `"Node"` —— 解析 node_modules 中的依赖
+
+完成以上调整后的 `tsconfig.json` 内容：
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "Node",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+}
+
+```
+
+### 5. 配置IDE
 
 推荐使用 VSCode，安装以下插件：
 
@@ -54,7 +91,7 @@ pnpm install
 
 安装完成后，打开 .vue 文件，底部区域将会出现一个 TypeScript 版本，点击可以切换（选择与 VSCode 使用的 TypeScript 版本统一或与项目依赖的 TypeScript 配置统一）。
 
-### 5. 初始化 Git 配置
+### 6. 初始化 Git 配置
 
 ```shell
 git init
@@ -62,4 +99,56 @@ git remote add origin git@github.com:lexmin0412/react-template.git
 git add .
 git commit -m 'feat: init project'
 git push -u origin master
+```
+
+### 7. 引入 Ant Design Vue
+
+#### 7.1 安装依赖
+
+Ant Design Vue 已跟进 Ant Design 5.x 版本发布了 4.0 正式版，我们可以直接安装：
+
+```bash
+pnpm add ant-design-vue@4.x
+```
+
+#### 7.2 按需加载
+
+通过 `unplugin-vue-components` 插件可以实现自动按需加载。
+
+安装依赖：
+
+```bash
+pnpm add unplugin-vue-components -D
+```
+
+在 `vite.config.ts` 中添加如下配置：
+
+```ts
+import { defineConfig } from 'vite'
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+		Components({
+			resolvers: [
+				AntDesignVueResolver({
+					importStyle: false,
+				}),
+			],
+		}),
+	],
+})
+
+```
+
+#### 7.3 使用
+
+直接在 .vue 文件中即可使用：
+
+```vue
+<template>
+	<a-button type="primary">Primary Button</a-button>
+</template>
 ```
